@@ -16,15 +16,23 @@ chmod +x install_ioncube.sh
 
 # Descargar e instalar Redis & Memcached
 echo "Instalando Redis & Memcached..."
-sudo apt install -y redis-server
 sudo apt install -y memcached libmemcached-tools
-sudo apt install memcached
-systemctl restart memcached
-systemctl restart redis-server
 sudo apt install -y php-memcached
+sudo apt install -y php8.0-memcached
+sudo apt install -y php8.1-memcached
+sudo apt install -y php8.2-memcached
+sudo apt install -y php8.3-memcached
+sudo apt install -y php8.4-memcached
+sudo apt install -y php8.0-redis
+sudo apt install -y php8.1-redis
+sudo apt install -y php8.2-redis
+sudo apt install -y php8.3-redis
+sudo apt install -y php8.4-redis
 sudo apt install -y php-redis
+sudo apt install -y redis-server
 sudo systemctl enable memcached
 sudo systemctl enable redis-server
+apt update
 
 #!/bin/bash
 
