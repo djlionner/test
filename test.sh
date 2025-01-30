@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Eliminar UFW si está instalado
 echo "Verificando si UFW está instalado..."
 if dpkg -l | grep -q ufw; then
@@ -27,26 +25,25 @@ apt install -y php8.4 php8.4-cli php8.4-fpm php8.4-mysql php8.4-curl php8.4-xml 
 
 # Descargar e instalar ionCube Loader
 echo "Instalando ionCube Loader..."
-wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz
-tar -xvzf ioncube_loaders_lin_x86-64.tar.gz -C /usr/lib/php/
-echo "zend_extension=/usr/lib/php/ioncube/ioncube_loader_lin_8.4.so" > /etc/php/8.4/fpm/conf.d/00-ioncube.ini
-echo "zend_extension=/usr/lib/php/ioncube/ioncube_loader_lin_8.4.so" > /etc/php/8.4/cli/conf.d/00-ioncube.ini
-systemctl restart php8.4-fpm
+wget https://raw.githubusercontent.com/jaapmarcus/ioncube-hestia-installer/main/install_ioncube.sh
+chmod +x install_ioncube.sh
+./install_ioncube.sh
 
 # Descargar e instalar Redis & Memcached
 echo "Instalando Redis & Memcached..."
-apt install -y redis-server
-apt install -y memcached libmemcached-tools
+sudo apt install -y redis-server
+sudo apt install -y memcached libmemcached-tools
+sudo apt install memcached
 systemctl restart memcached
 systemctl restart redis-server
-apt install -y php-memcached
-apt install -y php-redis
-systemctl enable memcached
-systemctl enable redis-server
+sudo apt install -y php-memcached
+sudo apt install -y php-redis
+sudo systemctl enable memcached
+sudo systemctl enable redis-server
 
 # Configurar usuario y dominios en HestiaCP
 echo "Configurando usuario y dominios en HestiaCP..."
-v-add-user lionnermedia password "lionnermedia - user" lionnermedia@lionner.com
+v-add-user lionnermedia password "lionnermedia - user" admin@lionner.com
 
 # Configurar dominios para el nuevo usuario
 for domain in cloud.lionnermedia.com nube.lionnermedia.com webhost.lionnermedia.com hosting.lionnermedia.com host.lionnermedia.com lionnermedia.com; do
