@@ -44,21 +44,22 @@ apt install -y php-redis
 systemctl enable memcached
 systemctl enable redis-server
 
-
 # Configurar usuario y dominios en HestiaCP
 echo "Configurando usuario y dominios en HestiaCP..."
-v-add-user lionner password "Lionner User" lionner@lionner.com
-for domain in cloud.lionner.com nube.lionner.com webhost.lionner.com hosting.lionner.com host.lionner.com lionner.com; do
-    v-add-web-domain lionner $domain
-    v-add-letsencrypt-domain lionner $domain
+v-add-user lionnermedia password "lionnermedia - user" lionnermedia@lionner.com
+
+# Configurar dominios para el nuevo usuario
+for domain in cloud.lionnermedia.com nube.lionnermedia.com webhost.lionnermedia.com hosting.lionnermedia.com host.lionnermedia.com lionnermedia.com; do
+    v-add-web-domain lionnermedia $domain
+    v-add-letsencrypt-domain lionnermedia $domain
 done
 
 # Crear cuentas de correo
 echo "Creando cuentas de correo..."
 declare -a emails=("admin" "management" "noreply" "cloud" "hosting")
 for email in "${emails[@]}"; do
-    v-add-mail-domain lionner lionner.com
-    v-add-mail-account lionner lionner.com $email "password"
+    v-add-mail-domain lionnermedia lionnermedia.com
+    v-add-mail-account lionnermedia lionnermedia.com $email "password"
 done
 
 # Instalar skins de HestiaCP
