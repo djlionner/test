@@ -1,11 +1,6 @@
 
 
 #!/bin/bash
-
-wget https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh
-bash hst-install.sh -y --port 2507 --lang es --hostname panel.lionner.com --email admin@lionner.com --password Vlamileos2507 --multiphp yes --proftpd yes --mysql8 yes --postgresql yes --sieve yes --quota yes --interactive no
-
-# Buscar todas las versiones de PHP instaladas
 PHP_VERSIONS=$(ls /etc/php/)
 
 # Configuración común para todas las versiones de PHP
