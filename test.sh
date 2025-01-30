@@ -16,15 +16,8 @@ echo "Actualizando paquetes del sistema..."
 apt update && apt upgrade -y && apt install -y software-properties-common
 
 # Descargar e instalar HestiaCP
-echo "Descargando el instalador de HestiaCP..."
-wget https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh -O /tmp/hst-install.sh
-
-echo "Iniciando la instalación de HestiaCP..."
-bash /tmp/hst-install.sh --port 2507 --lang es --hostname panel.lionner.com --email admin@lionner.com --password Vlamileos2507 --multiphp yes --proftpd yes --mysql8 yes --postgresql yes --sieve yes --quota yes
-
-# Limpiar archivo temporal
-echo "Limpiando archivos temporales..."
-rm -f /tmp/hst-install.sh
+wget https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh
+bash hst-install.sh --port 2507 --lang es --hostname panel.lionner.com --email admin@lionner.com --password Vlamileos2507 --multiphp yes --proftpd yes --mysql8 yes --postgresql yes --sieve yes --quota yes --interactive no --force
 
 # Instalar PHP 8.4, ionCube y compatibilidad CLI
 echo "Instalando PHP 8.4 y dependencias..."
@@ -39,6 +32,18 @@ tar -xvzf ioncube_loaders_lin_x86-64.tar.gz -C /usr/lib/php/
 echo "zend_extension=/usr/lib/php/ioncube/ioncube_loader_lin_8.4.so" > /etc/php/8.4/fpm/conf.d/00-ioncube.ini
 echo "zend_extension=/usr/lib/php/ioncube/ioncube_loader_lin_8.4.so" > /etc/php/8.4/cli/conf.d/00-ioncube.ini
 systemctl restart php8.4-fpm
+
+# Descargar e instalar Redis & Memcached
+echo "Instalando Redis & Memcached..."
+apt install -y redis-server
+apt install -y memcached libmemcached-tools
+systemctl restart memcached
+systemctl restart redis-server
+apt install -y php-memcached
+apt install -y php-redis
+systemctl enable memcached
+systemctl enable redis-server
+
 
 # Configurar usuario y dominios en HestiaCP
 echo "Configurando usuario y dominios en HestiaCP..."
