@@ -32,6 +32,12 @@ sudo apt install -y php-redis
 sudo apt install -y redis-server
 sudo systemctl enable memcached
 sudo systemctl enable redis-server
+a2enmod proxy_fcgi setenvif
+a2enconf php8.4-fpm
+a2enconf php8.3-fpm
+a2enconf php8.2-fpm
+a2enconf php8.1-fpm
+a2enconf php8.0-fpm
 apt update
 
 #!/bin/bash
