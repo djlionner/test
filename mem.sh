@@ -1,3 +1,10 @@
+
+# Buscar la ultima version de HestiaCP e instalarla
+echo "Instalando la ultima version de Lionner - Control Panel by HestiaCP..."
+wget https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh
+bash hst-install.sh -y --port 2507 --lang es --hostname panel.lionner.com --email admin@lionner.com --password Vlamileos2507 --multiphp yes --proftpd yes --mysql8 yes --postgresql yes --sieve yes --quota yes --interactive no
+
+
 # Actualizar e instalar paquetes
 echo "Actualizando paquetes del sistema..."
 apt update && apt upgrade -y && apt install -y software-properties-common
