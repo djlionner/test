@@ -17,7 +17,7 @@ apt update && apt upgrade -y && apt install -y software-properties-common
 wget https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh
 bash hst-install.sh --port 2507 --lang es --hostname panel.lionner.com --email admin@lionner.com --password Vlamileos2507 --multiphp yes --proftpd yes --mysql8 yes --postgresql yes --sieve yes --quota yes --interactive no --force
 
-# Instalar PHP 8.4, ionCube y compatibilidad CLI
+# Instalar PHP 8.4 y compatibilidad CLI
 echo "Instalando PHP 8.4 y dependencias..."
 add-apt-repository ppa:ondrej/php -y
 apt update
@@ -67,10 +67,10 @@ git clone https://github.com/MaxiZamorano/maxtheme.git
 
 # Configurar PHP para Nextcloud
 echo "Configurando PHP para Nextcloud..."
-echo "memory_limit = 8G" >> /etc/php/8.4/fpm/php.ini
-echo "upload_max_filesize = 20G" >> /etc/php/8.4/fpm/php.ini
-echo "date.timezone = Europe/Madrid" >> /etc/php/8.4/fpm/php.ini
-systemctl restart php8.4-fpm
+echo "memory_limit = 8G" >> /etc/php/8.2/fpm/php.ini
+echo "upload_max_filesize = 20G" >> /etc/php/8.2/fpm/php.ini
+echo "date.timezone = Europe/Madrid" >> /etc/php/8.2/fpm/php.ini
+systemctl restart php8.2-fpm
 
 # Reiniciar HestiaCP
 echo "Reiniciando HestiaCP..."
