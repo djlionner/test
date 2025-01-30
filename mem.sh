@@ -26,14 +26,4 @@ sudo apt install -y php-redis
 sudo systemctl enable memcached
 sudo systemctl enable redis-server
 
-# Instalar skins de HestiaCP
-echo "Instalando skins de HestiaCP..."
-mkdir -p /usr/local/hestia/web/themes
-cd /usr/local/hestia/web/themes
-git clone https://github.com/MaxiZamorano/maxtheme.git
-
-# Reiniciar Sistema
-echo "Reiniciando..."
-reboot
-
 echo "Instalación completada."
