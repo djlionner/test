@@ -1,5 +1,5 @@
 wget https://raw.githubusercontent.com/djlionner/test/main/mem.sh -O /tmp/mem.sh
 
-chmod +x /tmp/test.sh
+chmod +x /tmp/mem.sh
 
-/tmp/test.sh
+/tmp/mem.sh
