@@ -1,6 +1,36 @@
-
-
 #!/bin/bash
+
+# Actualizar sistema
+apt update && apt upgrade -y
+
+# Instalar software necesario
+apt install -y software-properties-common apt-transport-https ca-certificates curl
+
+# Agregar repositorio de Sury para versiones de PHP
+add-apt-repository ppa:ondrej/php -y
+apt update
+
+# Lista de versiones de PHP compatibles con HestiaCP
+PHP_VERSIONS=("5.6" "7.0" "7.1" "7.2" "7.3" "7.4" "8.0" "8.1" "8.2" "8.3")
+
+# Instalar todas las versiones de PHP con FPM y módulos básicos
+for version in "${PHP_VERSIONS[@]}"; do
+    apt install -y php${version} php${version}-fpm php${version}-cli php${version}-common php${version}-mbstring php${version}-xml php${version}-curl php${version}-zip php${version}-mysql php${version}-gd php${version}-bcmath php${version}-intl php${version}-soap php${version}-opcache php${version}-readline php${version}-imagick php${version}-redis php${version}-json php${version}-imap php${version}-xmlrpc
+done
+
+# Asegurar que los servicios PHP-FPM estén activos
+for version in "${PHP_VERSIONS[@]}"; do
+    systemctl enable php${version}-fpm
+    systemctl start php${version}-fpm
+done
+
+# Integrar versiones de PHP en HestiaCP
+for version in "${PHP_VERSIONS[@]}"; do
+    v-add-web-php ${version} fpm
+done
+
+echo "Todas las versiones de PHP han sido instaladas y configuradas en HestiaCP."
+
 PHP_VERSIONS=$(ls /etc/php/)
 
 # Configuración común para todas las versiones de PHP
@@ -56,4 +86,5 @@ for version in $PHP_VERSIONS; do
     systemctl restart php$version-fpm
 done
 
-echo "Ajustes de PHP para todas las versiones aplicados correctamente."
+# Reiniciar HestiaCP
+systemctl restart hestia
