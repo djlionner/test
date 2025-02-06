@@ -78,7 +78,7 @@ for version in "${PHP_VERSIONS[@]}"; do
 done
 
 # Instalar npm y mjs
-apt install -y npm
+sudo apt install nodejs npm
 
 # Verificar si npm se instaló correctamente
 if command -v npm &>/dev/null; then
