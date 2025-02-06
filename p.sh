@@ -15,11 +15,6 @@ apt install -y language-pack-es
 # Configurar el idioma predeterminado a español
 update-locale LANG=es_ES.UTF-8
 
-# Instalar HestiaCP
-echo "Instalando HestiaCP..."
-wget https://raw.githubusercontent.com/hestiacp/hestiacp/release/install/hst-install.sh
-bash hst-install.sh --lang 'es' --hostname 'cp.lionner.es' --username 'admin' --email 'admin@lionner.es' --password 'Vlamileos2507' --multiphp '7.0,7.1,7.2,7.3,7.4,8.0,8.1,8.2,8.3,8.4' --mysql8 yes --postgresql yes --sieve yes --quota yes --webterminal yes --interactive no
-
 # Agregar repositorio de Sury para versiones de PHP
 add-apt-repository ppa:ondrej/php -y
 apt update
